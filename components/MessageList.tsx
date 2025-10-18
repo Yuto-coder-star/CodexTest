@@ -34,7 +34,6 @@ export function MessageList({ conversation }: { conversation: Conversation | nul
             <MessageBubble
               key={message.id}
               message={message}
-              conversationId={conversation.id}
               isStreaming={streaming?.messageId === message.id}
               onEdit={() => startEditing(message.id, message.content)}
               onDelete={() => deleteMessage(conversation.id, message.id)}
@@ -60,7 +59,7 @@ function MessageBubble({
   isStreaming: boolean;
   onEdit: () => void;
   onDelete: () => void;
-  onRegenerate: () => void;
+  onRegenerate: () => Promise<void>;
   onStop: () => void;
 }) {
   const isUser = message.role === "user";
